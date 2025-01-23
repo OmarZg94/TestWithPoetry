@@ -1,12 +1,11 @@
 package com.example.testwithpoetry.domain.repository
 
-import com.example.testwithpoetry.data.models.AuthorsResponse
-import com.example.testwithpoetry.data.models.PoemResponse
-import com.example.testwithpoetry.data.models.PoemTitleReponse
-import com.example.testwithpoetry.data.network.NetworkResource
+import com.example.testwithpoetry.domain.models.Author
+import com.example.testwithpoetry.domain.models.Poem
+import com.example.testwithpoetry.domain.models.PoemTitle
 
 interface PoetryRepository {
-    suspend fun getAuths(): NetworkResource<AuthorsResponse>
-    suspend fun getTitlesByAuthor(authorName: String): NetworkResource<PoemTitleReponse>
-    suspend fun getPoem(authorName: String, title: String): NetworkResource<List<PoemResponse>>
+    suspend fun getAuthors(): List<Author>
+    suspend fun getTitlesByAuthor(authorName: String): PoemTitle
+    suspend fun getPoem(authorName: String, title: String): List<Poem>
 }
