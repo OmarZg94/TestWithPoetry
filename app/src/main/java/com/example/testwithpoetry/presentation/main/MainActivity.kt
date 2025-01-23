@@ -1,4 +1,4 @@
-package com.example.testwithpoetry
+package com.example.testwithpoetry.presentation.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.testwithpoetry.ui.theme.TestWithPoetryTheme
+import com.example.testwithpoetry.presentation.ui.theme.TestWithPoetryTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

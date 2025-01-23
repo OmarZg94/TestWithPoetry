@@ -1,8 +1,10 @@
-package com.example.testwithpoetry
+package com.example.testwithpoetry.data.repository
 
-import com.example.testwithpoetry.remoteResponses.AuthorsResponse
-import com.example.testwithpoetry.remoteResponses.PoemResponse
-import com.example.testwithpoetry.remoteResponses.PoemTitleReponse
+import com.example.testwithpoetry.data.network.NetworkResource
+import com.example.testwithpoetry.data.models.AuthorsResponse
+import com.example.testwithpoetry.data.models.PoemResponse
+import com.example.testwithpoetry.data.models.PoemTitleReponse
+import com.example.testwithpoetry.domain.repository.PoetryRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -11,10 +13,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PoetryRepository @Inject constructor(
+class PoetryRepositoryImpl @Inject constructor(
     private val client: HttpClient
-) {
-    suspend fun getAuths(): NetworkResource<AuthorsResponse> {
+): PoetryRepository {
+    override suspend fun getAuths(): NetworkResource<AuthorsResponse> {
         return withContext(Dispatchers.IO) {
             val response = client.get("https://poetrydb.org/author")
 
@@ -26,7 +28,7 @@ class PoetryRepository @Inject constructor(
         }
     }
 
-    suspend fun getTitlesByAuthor(authorName: String): NetworkResource<PoemTitleReponse> {
+    override suspend fun getTitlesByAuthor(authorName: String): NetworkResource<PoemTitleReponse> {
         return withContext(Dispatchers.IO) {
             val response = client.get("https://poetrydb.org/author/$authorName/title")
 
@@ -38,7 +40,7 @@ class PoetryRepository @Inject constructor(
         }
     }
 
-    suspend fun getPoem(authorName: String, title: String): NetworkResource<List<PoemResponse>> {
+    override suspend fun getPoem(authorName: String, title: String): NetworkResource<List<PoemResponse>> {
         return withContext(Dispatchers.IO) {
             val response = client.get("https://poetrydb.org/author,title/$authorName;$title")
 
