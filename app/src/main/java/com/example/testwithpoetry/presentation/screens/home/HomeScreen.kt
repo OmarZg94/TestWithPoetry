@@ -1,4 +1,4 @@
-package com.example.testwithpoetry.presentation.screens.main
+package com.example.testwithpoetry.presentation.screens.home
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,11 +23,11 @@ import com.example.testwithpoetry.presentation.components.NavigationTab
 import com.example.testwithpoetry.presentation.screens.authorslist.AuthorsListScreen
 import com.example.testwithpoetry.utils.EMPTY
 
-const val MAIN_DESTINATION = "main"
+const val HOME_DESTINATION = "home"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(
+fun HomeScreen(
     user: String
 ) {
     val navController = rememberNavController()
