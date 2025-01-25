@@ -25,11 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.testwithpoetry.R
-import com.example.testwithpoetry.domain.models.User
 import com.example.testwithpoetry.presentation.components.DatePickerModal
 import com.example.testwithpoetry.presentation.theme.SizeMd
 import com.example.testwithpoetry.presentation.theme.SizeSm
@@ -40,9 +38,8 @@ const val WELCOME_DESTINATION = "welcome"
 
 @Composable
 fun WelcomeScreen(
-    onNavigateToAuthors: (User) -> Unit
+    onNavigateToMain: (String) -> Unit
 ) {
-    val context = LocalContext.current
     var name by remember { mutableStateOf(EMPTY) }
     var email by remember { mutableStateOf(EMPTY) }
     var birthday by remember { mutableLongStateOf(0L) }
@@ -107,9 +104,7 @@ fun WelcomeScreen(
 
         Button(
             onClick = {
-                onNavigateToAuthors(
-                    User(name = name, email = email, birthday = birthday)
-                )
+                onNavigateToMain(name)
             },
             enabled = isFormValid,
             modifier = Modifier.fillMaxWidth()

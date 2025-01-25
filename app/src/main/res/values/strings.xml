@@ -9,6 +9,16 @@
     <string name="content_description_select_date">Select date</string>
     <string name="go_to_authors_list">Go to Authors List</string>
 
+    <!-- Poetry Screen -->
+    <string name="label_poetry_title">Welcome, %s</string>
+
+    <!-- Profile Screen -->
+    <string name="label_profile_title">Profile</string>
+
+    <!-- Tabs -->
+    <string name="tab_poetry">Poetry</string>
+    <string name="tab_account">Account</string>
+
     <!-- DatePickerModal -->
     <string name="label_select_a_date">Please select a date</string>
     <string name="action_ok">OK</string>
