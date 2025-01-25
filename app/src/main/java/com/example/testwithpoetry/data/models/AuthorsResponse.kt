@@ -9,5 +9,5 @@ data class AuthorsResponse(
 )
 
 fun String.toDomain(): Author {
-    return Author(name = this)
+    return Author(name = this, isFavorite = false)
 }
