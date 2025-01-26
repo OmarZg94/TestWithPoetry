@@ -52,8 +52,9 @@ fun AuthorsListScreen(
             }
         }
 
-        if (authorsListState.error.isNotBlank()) {
-            Toast.makeText(context, authorsListState.error, Toast.LENGTH_SHORT).show()
+        val toast = Toast.makeText(context, authorsListState.message, Toast.LENGTH_SHORT)
+        if (authorsListState.message.isNotBlank()) {
+            toast.show()
         }
 
         authorsListState.authors?.let { authorsList ->

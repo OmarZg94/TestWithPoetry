@@ -45,7 +45,7 @@ class AuthorsListViewModel @Inject constructor(
             _authorsListState.update {
                 it.copy(
                     isLoading = true,
-                    error = EMPTY
+                    message = EMPTY
                 )
             }
             try {
@@ -55,7 +55,7 @@ class AuthorsListViewModel @Inject constructor(
                 _authorsListState.update {
                     it.copy(
                         isLoading = false,
-                        error = e.message ?: UNKNOWN_ERROR
+                        message = e.message ?: UNKNOWN_ERROR
                     )
                 }
             }
@@ -75,7 +75,7 @@ class AuthorsListViewModel @Inject constructor(
             it.copy(
                 isLoading = false,
                 authors = mergedAuthors,
-                error = EMPTY
+                message = EMPTY
             )
         }
     }
@@ -84,6 +84,9 @@ class AuthorsListViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             saveFavoriteAuthorUseCase(author)
             mergeFavoriteAuthors(authorsListState.value.authors!!)
+            _authorsListState.update {
+                it.copy(message = "Author added to favorites")
+            }
         }
     }
 
@@ -91,6 +94,9 @@ class AuthorsListViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             removeFavoriteAuthorUseCase(author)
             mergeFavoriteAuthors(authorsListState.value.authors!!)
+            _authorsListState.update {
+                it.copy(message = "Author removed from favorites")
+            }
         }
     }
 }
