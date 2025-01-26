@@ -25,10 +25,10 @@ class PoetryRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTitlesByAuthor(authorName: String): PoemTitle {
+    override suspend fun getTitlesByAuthor(authorName: String): List<PoemTitle> {
         return safeApiCall {
             val response = client.get("https://poetrydb.org/author/$authorName/title")
-            response.body<PoemTitleResponse>().toDomain()
+            response.body<List<PoemTitleResponse>>().map { it.toDomain() }
         }
     }
 

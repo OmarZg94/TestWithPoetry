@@ -3,6 +3,8 @@ package com.example.testwithpoetry.presentation.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
@@ -15,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.testwithpoetry.R
 import com.example.testwithpoetry.domain.models.Author
+import com.example.testwithpoetry.presentation.theme.SizeXL
 
 @Composable
 fun AuthorItem(
@@ -24,11 +27,14 @@ fun AuthorItem(
     onFavoriteClicked: () -> Unit
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(SizeXL),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             modifier = Modifier
+                .fillMaxWidth(0.9F)
                 .align(Alignment.CenterVertically)
                 .clickable {
                     onAuthorClicked()
@@ -46,7 +52,9 @@ fun AuthorItem(
             stringResource(R.string.content_description_not_favorite_author)
         }
         Icon(
-            modifier = Modifier.clickable {
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .clickable {
                 onFavoriteClicked()
             },
             painter = icon,

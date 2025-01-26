@@ -10,7 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.testwithpoetry.R
+import com.example.testwithpoetry.presentation.screens.authordetail.DETAIL_DESTINATION
 import com.example.testwithpoetry.presentation.screens.authorslist.POETRY_DESTINATION
+import com.example.testwithpoetry.presentation.screens.profile.ACCOUNT_DESTINATION
 
 @Composable
 fun BottomNavigationBar(
@@ -45,6 +47,9 @@ sealed class NavigationTab(
     @DrawableRes val icon: Int
 ) {
     data object Poetry : NavigationTab(POETRY_DESTINATION, R.string.tab_poetry, R.drawable.ic_book)
-    data object AuthorDetails : NavigationTab("account", R.string.tab_author_details, R.drawable.ic_book)
-    data object Account : NavigationTab("account", R.string.tab_account, R.drawable.ic_account)
+    data object AuthorDetails :
+        NavigationTab(DETAIL_DESTINATION, R.string.tab_author_details, R.drawable.ic_book)
+
+    data object Account :
+        NavigationTab(ACCOUNT_DESTINATION, R.string.tab_account, R.drawable.ic_account)
 }

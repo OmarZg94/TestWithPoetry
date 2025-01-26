@@ -6,6 +6,6 @@ import com.example.testwithpoetry.domain.models.PoemTitle
 
 interface PoetryRepository {
     suspend fun getAuthors(): List<Author>
-    suspend fun getTitlesByAuthor(authorName: String): PoemTitle
+    suspend fun getTitlesByAuthor(authorName: String): List<PoemTitle>
     suspend fun getPoem(authorName: String, title: String): List<Poem>
 }

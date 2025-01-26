@@ -27,6 +27,8 @@ import com.example.testwithpoetry.presentation.theme.SizeSm
 import com.example.testwithpoetry.utils.EMPTY
 import com.example.testwithpoetry.utils.convertMillisToDate
 
+const val ACCOUNT_DESTINATION = "account"
+
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
@@ -40,7 +42,7 @@ fun ProfileScreen(
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(SizeMd)
     ) {
