@@ -1,11 +1,8 @@
 package com.example.testwithpoetry.presentation.screens.authorslist
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,11 +17,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.testwithpoetry.R
+import com.example.testwithpoetry.domain.models.Author
+import com.example.testwithpoetry.presentation.components.AuthorItem
 import com.example.testwithpoetry.presentation.theme.SizeMd
 
 const val POETRY_DESTINATION = "poetry"
@@ -33,7 +30,8 @@ const val POETRY_DESTINATION = "poetry"
 @Composable
 fun AuthorsListScreen(
     modifier: Modifier = Modifier,
-    viewModel: AuthorsListViewModel = hiltViewModel()
+    viewModel: AuthorsListViewModel = hiltViewModel(),
+    onNavigateToDetail: (Author) -> Unit
 ) {
     val authorsListState by viewModel.authorsListState.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -64,34 +62,21 @@ fun AuthorsListScreen(
                     modifier = Modifier.padding(horizontal = SizeMd)
                 ) {
                     items(authorsList) { author ->
-                        Row(
+                        AuthorItem(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(author.name)
-                            val icon = if (author.isFavorite) {
-                                painterResource(R.drawable.ic_star)
-                            } else {
-                                painterResource(R.drawable.ic_star_outline)
+                            author = author,
+                            onAuthorClicked = {
+                                onNavigateToDetail(author)
+                            },
+                            onFavoriteClicked = {
+                                val event = if (author.isFavorite) {
+                                    AuthorsListEvent.RemoveFavoriteAuthor(author)
+                                } else {
+                                    AuthorsListEvent.SaveFavoriteAuthor(author)
+                                }
+                                viewModel.onEvent(event)
                             }
-                            val contentDescription = if (author.isFavorite) {
-                                stringResource(R.string.content_description_favorite_author)
-                            } else {
-                                stringResource(R.string.content_description_not_favorite_author)
-                            }
-                            Icon(
-                                modifier = Modifier.clickable {
-                                    val event = if (author.isFavorite) {
-                                        AuthorsListEvent.RemoveFavoriteAuthor(author)
-                                    } else {
-                                        AuthorsListEvent.SaveFavoriteAuthor(author)
-                                    }
-                                    viewModel.onEvent(event)
-                                },
-                                painter = icon,
-                                contentDescription = contentDescription
-                            )
-                        }
+                        )
                         HorizontalDivider()
                     }
                 }

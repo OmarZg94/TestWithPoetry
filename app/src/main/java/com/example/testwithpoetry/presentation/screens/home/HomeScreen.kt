@@ -58,7 +58,9 @@ fun HomeScreen(
         ) {
             composable(NavigationTab.Poetry.route) {
                 topAppBarTitle = stringResource(R.string.label_poetry_title, user)
-                AuthorsListScreen()
+                AuthorsListScreen(onNavigateToDetail = {
+
+                })
             }
 
             composable(NavigationTab.AuthorDetails.route) {
