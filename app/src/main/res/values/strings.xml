@@ -17,6 +17,7 @@
 
     <!-- Profile Screen -->
     <string name="label_profile_title">Profile</string>
+    <string name="label_sign_out">Sign out</string>
 
     <!-- Tabs -->
     <string name="tab_poetry">Poetry</string>

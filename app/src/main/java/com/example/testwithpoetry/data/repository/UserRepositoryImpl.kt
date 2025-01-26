@@ -23,12 +23,7 @@ class UserRepositoryImpl @Inject constructor(
         return userEntity?.toDomain()
     }
 
-    override suspend fun deleteUser(user: User) {
-        val userEntity = UserEntity(
-            name = user.name,
-            email = user.email,
-            birthday = user.birthday
-        )
-        userDao.deleteUser(userEntity)
+    override suspend fun deleteUser() {
+        userDao.deleteAll()
     }
 }

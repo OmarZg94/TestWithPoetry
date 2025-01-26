@@ -29,7 +29,8 @@ const val HOME_DESTINATION = "home"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    user: String
+    user: String,
+    onNavigateToWelcome: () -> Unit
 ) {
     val navController = rememberNavController()
     var topAppBarTitle by remember { mutableStateOf(EMPTY) }
@@ -69,7 +70,7 @@ fun HomeScreen(
 
             composable(NavigationTab.Account.route) {
                 topAppBarTitle = stringResource(R.string.label_profile_title)
-                ProfileScreen()
+                ProfileScreen(onNavigateToWelcome = onNavigateToWelcome)
             }
         }
     }

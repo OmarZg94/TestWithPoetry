@@ -22,8 +22,7 @@ fun AppNavHost(
     NavHost(navController, startDestination = startDestination) {
         composable(WELCOME_DESTINATION) {
             WelcomeScreen(onNavigateToMain = { userName ->
-                val route = "$HOME_DESTINATION/$userName"
-                navController.navigate(route) {
+                navController.navigate("$HOME_DESTINATION/$userName") {
                     popUpTo(WELCOME_DESTINATION) {
                         inclusive = true
                     }
@@ -37,7 +36,16 @@ fun AppNavHost(
             )
         ) {
             val userName = it.arguments?.getString(USER_NAME) ?: EMPTY
-            HomeScreen(user = userName)
+            HomeScreen(
+                user = userName,
+                onNavigateToWelcome = {
+                    navController.navigate(WELCOME_DESTINATION) {
+                        popUpTo(0) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
     }
 }
