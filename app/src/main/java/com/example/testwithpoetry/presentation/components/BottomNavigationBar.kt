@@ -7,6 +7,10 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.testwithpoetry.R
@@ -23,12 +27,16 @@ fun BottomNavigationBar(
         NavigationTab.Poetry,
         NavigationTab.Account
     )
+    var tabSelected by remember { mutableStateOf(currentRoute) }
 
     NavigationBar {
         tabs.forEach { tab ->
             NavigationBarItem(
-                selected = currentRoute == tab.route,
-                onClick = { onTabSelected(tab.route) },
+                selected = tabSelected == tab.route,
+                onClick = {
+                    tabSelected = tab.route
+                    onTabSelected(tab.route)
+                },
                 icon = {
                     Image(
                         painter = painterResource(tab.icon),
