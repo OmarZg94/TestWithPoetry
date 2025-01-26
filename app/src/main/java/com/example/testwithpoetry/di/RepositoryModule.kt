@@ -1,7 +1,9 @@
 package com.example.testwithpoetry.di
 
+import com.example.testwithpoetry.data.repository.FavoriteAuthorRepositoryImpl
 import com.example.testwithpoetry.data.repository.PoetryRepositoryImpl
 import com.example.testwithpoetry.data.repository.UserRepositoryImpl
+import com.example.testwithpoetry.domain.repository.FavoriteAuthorRepository
 import com.example.testwithpoetry.domain.repository.PoetryRepository
 import com.example.testwithpoetry.domain.repository.UserRepository
 import dagger.Binds
@@ -19,7 +21,12 @@ abstract class RepositoryModule {
     ): PoetryRepository
 
     @Binds
-    abstract fun binUserRepository(
+    abstract fun bindUserRepository(
         impl: UserRepositoryImpl
     ): UserRepository
+
+    @Binds
+    abstract fun bindFavoriteAuthorRepository(
+        impl: FavoriteAuthorRepositoryImpl
+    ): FavoriteAuthorRepository
 }

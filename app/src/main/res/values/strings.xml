@@ -11,12 +11,16 @@
 
     <!-- Poetry Screen -->
     <string name="label_poetry_title">Welcome, %s</string>
+    <string name="label_empty_authors">Empty authors</string>
+    <string name="content_description_favorite_author">Favorite author</string>
+    <string name="content_description_not_favorite_author">Not favorite author</string>
 
     <!-- Profile Screen -->
     <string name="label_profile_title">Profile</string>
 
     <!-- Tabs -->
     <string name="tab_poetry">Poetry</string>
+    <string name="tab_author_details">Author Details</string>
     <string name="tab_account">Account</string>
 
     <!-- DatePickerModal -->

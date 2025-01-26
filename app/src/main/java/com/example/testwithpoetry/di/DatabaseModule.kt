@@ -2,6 +2,7 @@ package com.example.testwithpoetry.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.testwithpoetry.data.local.dao.FavoriteAuthorDao
 import com.example.testwithpoetry.data.local.dao.UserDao
 import com.example.testwithpoetry.data.local.database.AppDatabase
 import dagger.Module
@@ -31,5 +32,11 @@ object DatabaseModule {
     @Singleton
     fun provideUserDao(database: AppDatabase): UserDao {
         return database.userDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesFavoriteAuthorDao(database: AppDatabase): FavoriteAuthorDao {
+        return database.favoriteAuthorDao()
     }
 }

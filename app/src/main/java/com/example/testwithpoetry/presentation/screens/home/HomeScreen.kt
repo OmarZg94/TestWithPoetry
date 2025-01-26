@@ -21,6 +21,7 @@ import com.example.testwithpoetry.R
 import com.example.testwithpoetry.presentation.components.BottomNavigationBar
 import com.example.testwithpoetry.presentation.components.NavigationTab
 import com.example.testwithpoetry.presentation.screens.authorslist.AuthorsListScreen
+import com.example.testwithpoetry.presentation.screens.profile.ProfileScreen
 import com.example.testwithpoetry.utils.EMPTY
 
 const val HOME_DESTINATION = "home"
@@ -57,11 +58,16 @@ fun HomeScreen(
         ) {
             composable(NavigationTab.Poetry.route) {
                 topAppBarTitle = stringResource(R.string.label_poetry_title, user)
-                AuthorsListScreen(userName = user)
+                AuthorsListScreen()
+            }
+
+            composable(NavigationTab.AuthorDetails.route) {
+
             }
 
             composable(NavigationTab.Account.route) {
                 topAppBarTitle = stringResource(R.string.label_profile_title)
+                ProfileScreen()
             }
         }
     }

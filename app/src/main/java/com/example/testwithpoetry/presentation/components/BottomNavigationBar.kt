@@ -45,5 +45,6 @@ sealed class NavigationTab(
     @DrawableRes val icon: Int
 ) {
     data object Poetry : NavigationTab(POETRY_DESTINATION, R.string.tab_poetry, R.drawable.ic_book)
+    data object AuthorDetails : NavigationTab("account", R.string.tab_author_details, R.drawable.ic_book)
     data object Account : NavigationTab("account", R.string.tab_account, R.drawable.ic_account)
 }
