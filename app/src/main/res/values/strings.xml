@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">TestWithPoetry</string>
+
+    <!-- Welcome Screen -->
+    <string name="label_welcome">Welcome</string>
+    <string name="label_name">Name</string>
+    <string name="label_email">Email</string>
+    <string name="label_dob">Date of birth</string>
+    <string name="content_description_select_date">Select date</string>
+    <string name="go_to_authors_list">Go to Authors List</string>
+
+    <!-- Poetry Screen -->
+    <string name="label_poetry_title">Welcome, %s</string>
+    <string name="label_empty_authors">Empty authors</string>
+    <string name="content_description_favorite_author">Favorite author</string>
+    <string name="content_description_not_favorite_author">Not favorite author</string>
+
+    <!-- Author Detail Screen -->
+    <string name="label_empty_titles">Empty titles</string>
+
+    <!-- Profile Screen -->
+    <string name="label_profile_title">Profile</string>
+    <string name="label_sign_out">Sign out</string>
+
+    <!-- Tabs -->
+    <string name="tab_poetry">Poetry</string>
+    <string name="tab_author_details">Author Details</string>
+    <string name="tab_account">Account</string>
+
+    <!-- DatePickerModal -->
+    <string name="label_select_a_date">Please select a date</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
+
+    <!-- Poem Dialog -->
+    <string name="action_close">Close</string>
 </resources>
