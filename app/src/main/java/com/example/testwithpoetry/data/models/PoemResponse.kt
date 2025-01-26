@@ -8,14 +8,14 @@ data class PoemResponse(
     val title: String,
     val author: String,
     val lines: List<String>,
-    val lineCount: String
+    val linecount: String
 ) {
     fun toDomain(): Poem {
         return Poem(
             title = title,
             author = author,
             lines = lines,
-            lineCount = lineCount
+            lineCount = linecount
         )
     }
 }

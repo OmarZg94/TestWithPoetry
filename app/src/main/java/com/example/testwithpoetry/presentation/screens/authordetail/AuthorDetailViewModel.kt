@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testwithpoetry.di.IoDispatcher
 import com.example.testwithpoetry.domain.usecases.GetAuthorTitlesUseCase
+import com.example.testwithpoetry.domain.usecases.GetPoemUseCase
 import com.example.testwithpoetry.utils.EMPTY
 import com.example.testwithpoetry.utils.UNKNOWN_ERROR
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthorDetailViewModel @Inject constructor(
     private val getAuthorTitlesUseCase: GetAuthorTitlesUseCase,
+    private val getPoemUseCase: GetPoemUseCase,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -28,6 +30,8 @@ class AuthorDetailViewModel @Inject constructor(
     fun onEvent(event: AuthorDetailEvent) {
         when (event) {
             is AuthorDetailEvent.GetTitles -> getAuthorTitles(event.authorName)
+            is AuthorDetailEvent.GetPoem -> getPoem(event.authorName, event.title)
+            AuthorDetailEvent.ClosePoemDialog -> closePoemDialog()
         }
     }
 
@@ -56,6 +60,42 @@ class AuthorDetailViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    private fun getPoem(authorName: String, title: String) {
+        viewModelScope.launch(dispatcher) {
+            _authorDetailState.update {
+                it.copy(
+                    isLoading = true,
+                    message = EMPTY
+                )
+            }
+            try {
+                val poems = getPoemUseCase(authorName = authorName, title = title)
+                _authorDetailState.update {
+                    it.copy(
+                        isLoading = false,
+                        poem = poems,
+                        showPoemDialog = poems.isNotEmpty()
+                    )
+                }
+            } catch (e: Exception) {
+                _authorDetailState.update {
+                    it.copy(
+                        isLoading = false,
+                        message = e.message ?: UNKNOWN_ERROR
+                    )
+                }
+            }
+        }
+    }
+
+    private fun closePoemDialog() {
+        _authorDetailState.update {
+            it.copy(
+                showPoemDialog = false
+            )
         }
     }
 }

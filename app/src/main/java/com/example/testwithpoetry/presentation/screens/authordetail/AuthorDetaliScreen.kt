@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.testwithpoetry.R
+import com.example.testwithpoetry.presentation.components.PoemDialog
 import com.example.testwithpoetry.presentation.components.TitleItem
 import com.example.testwithpoetry.presentation.theme.SizeMd
 import com.example.testwithpoetry.utils.EMPTY
@@ -67,7 +68,12 @@ fun AuthorDetailScreen(
                             modifier = Modifier.fillMaxWidth(),
                             poemTitle = poemTitle,
                             onTitleClicked = { title ->
-
+                                viewModel.onEvent(
+                                    AuthorDetailEvent.GetPoem(
+                                        authorName = authorName,
+                                        title = title
+                                    )
+                                )
                             }
                         )
                         HorizontalDivider()
@@ -75,6 +81,18 @@ fun AuthorDetailScreen(
                 }
             } else {
                 Text(stringResource(R.string.label_empty_titles))
+            }
+        }
+
+        authorDetailState.poem?.let {
+            val poem = it.first()
+            if (authorDetailState.showPoemDialog) {
+                PoemDialog(
+                    title = poem.title,
+                    poem = poem.lines
+                ) {
+                    viewModel.onEvent(AuthorDetailEvent.ClosePoemDialog)
+                }
             }
         }
     }
